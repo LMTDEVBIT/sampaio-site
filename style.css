@@ -50,21 +50,21 @@ ul { list-style: none; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--green-dark);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: #fff;
+  border-bottom: 1px solid var(--border);
   transition: box-shadow .2s;
 }
-.header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.3); }
+.header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.1); }
 
 .header-inner {
   display: flex;
   align-items: center;
   gap: 24px;
-  height: 68px;
+  height: 76px;
 }
 
 .logo { flex-shrink: 0; }
-.logo-img { height: 44px; width: auto; }
+.logo-img { height: 58px; width: auto; }
 
 .nav-links {
   display: flex;
@@ -72,12 +72,12 @@ ul { list-style: none; }
   margin-left: auto;
 }
 .nav-links a {
-  color: rgba(255,255,255,.8);
+  color: var(--text);
   font-size: 14px;
   font-weight: 500;
   transition: color .15s;
 }
-.nav-links a:hover { color: #fff; }
+.nav-links a:hover { color: var(--green); }
 
 .header-ctas { display: flex; align-items: center; gap: 10px; }
 
@@ -85,17 +85,17 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   gap: 7px;
-  color: rgba(255,255,255,.9);
+  color: var(--text);
   font-size: 14px;
   font-weight: 600;
   padding: 8px 14px;
-  border: 1px solid rgba(255,255,255,.25);
+  border: 1px solid var(--border);
   border-radius: 8px;
   transition: background .15s;
   white-space: nowrap;
 }
 .hdr-tel svg { width: 15px; height: 15px; flex-shrink: 0; }
-.hdr-tel:hover { background: rgba(255,255,255,.1); }
+.hdr-tel:hover { background: var(--bg-light); }
 
 .hdr-wpp {
   display: flex;
@@ -127,7 +127,7 @@ ul { list-style: none; }
   display: block;
   width: 22px;
   height: 2px;
-  background: #fff;
+  background: var(--text);
   border-radius: 2px;
   transition: .2s;
 }
@@ -135,19 +135,19 @@ ul { list-style: none; }
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background: var(--green-dark);
+  background: #fff;
   padding: 16px 24px 24px;
   gap: 4px;
-  border-top: 1px solid rgba(255,255,255,.1);
+  border-top: 1px solid var(--border);
 }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
-  color: rgba(255,255,255,.85);
+  color: var(--text);
   font-size: 15px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,.07);
+  border-bottom: 1px solid var(--border);
 }
-.mob-tel { color: rgba(255,255,255,.9) !important; font-weight: 600; }
+.mob-tel { color: var(--green-dark) !important; font-weight: 600; }
 .mob-wpp {
   margin-top: 8px;
   background: var(--wpp);

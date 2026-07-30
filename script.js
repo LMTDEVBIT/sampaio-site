@@ -12,6 +12,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
+// Zona accordion
+document.querySelectorAll('.zona-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const card = header.closest('.zona-card');
+    const toggle = header.querySelector('.zona-toggle');
+    const isOpen = card.classList.toggle('open');
+    toggle.textContent = isOpen ? '−' : '+';
+  });
+});
+
 // Header scroll shadow
 window.addEventListener('scroll', () => {
   document.getElementById('header')?.classList.toggle('scrolled', window.scrollY > 10);

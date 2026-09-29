@@ -26,3 +26,18 @@ document.querySelectorAll('.zona-header').forEach(header => {
 window.addEventListener('scroll', () => {
   document.getElementById('header')?.classList.toggle('scrolled', window.scrollY > 10);
 });
+
+// GTM dataLayer — clique em telefone e WhatsApp
+window.dataLayer = window.dataLayer || [];
+
+document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+  a.addEventListener('click', () => {
+    window.dataLayer.push({ event: 'click_telefone' });
+  });
+});
+
+document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+  a.addEventListener('click', () => {
+    window.dataLayer.push({ event: 'click_whatsapp' });
+  });
+});

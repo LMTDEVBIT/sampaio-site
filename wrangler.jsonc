@@ -1,0 +1,8 @@
+{
+  "name": "desentupidora-sampaios",
+  "compatibility_date": "2026-09-15",
+  "assets": {
+    "directory": ".",
+    "exclude": [".git", "wrangler.jsonc"]
+  }
+}

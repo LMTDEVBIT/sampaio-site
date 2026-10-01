@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { locais, localPorSlug, emLocal, ondeFica, locaisProximos } from "./locais.mjs";
+import { posts } from "./blog.mjs";
 import { SERVICOS, SERVICOS_SIMPLES, diagnosticos, introServico, fraseVizinhos, introDesentupidora, faqLocal, porDestaque } from "./textos.mjs";
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -338,6 +339,86 @@ paginas.push({
   </section>`,
     jsonLd: servicoJsonLd("Desentupidora", "regioes-atendidas"),
     msgWa: "e quero saber se vocês atendem a minha região.",
+  }),
+});
+
+// ── blog ──
+const inline = (t) =>
+  esc(t)
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\((\/[^)]*)\)/g, '<a href="$2">$1</a>');
+const blocosHtml = (blocos) => {
+  const out = [];
+  let lista = [];
+  const fechaLista = () => {
+    if (lista.length) out.push(`<ul class="local-lista">${lista.map((i) => `<li>${inline(i)}</li>`).join("")}</ul>`);
+    lista = [];
+  };
+  for (const b of blocos) {
+    if (b.startsWith("- ")) { lista.push(b.slice(2)); continue; }
+    fechaLista();
+    out.push(b.startsWith("## ") ? `<h2>${esc(b.slice(3))}</h2>` : `<p>${inline(b)}</p>`);
+  }
+  fechaLista();
+  return out.join("\n      ");
+};
+for (const post of posts) {
+  const outros = posts.filter((p) => p !== post);
+  paginas.push({
+    slug: post.slug,
+    prioridade: "0.6",
+    html: pagina({
+      slug: post.slug,
+      titulo: `${post.titulo} | Blog Sampaio's`,
+      descricao: post.descricao,
+      h1: esc(post.h1),
+      subtitulo: post.resumo,
+      migalhas: [["Início", "/"], ["Blog", "/blog"], [post.titulo]],
+      corpo: `
+  <section class="section">
+    <article class="container local-texto blog-texto">
+      ${blocosHtml(post.blocos)}
+      <h2>Leia também</h2>
+      ${chips(outros.map((p) => [p.titulo, `/${p.slug}`]))}
+    </article>
+  </section>`,
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: post.h1,
+        description: post.descricao,
+        datePublished: post.data,
+        mainEntityOfPage: `${SITE}/${post.slug}`,
+        author: { "@type": "Organization", name: "Desentupidora Sampaio's", url: SITE },
+        publisher: { "@type": "Organization", name: "Desentupidora Sampaio's", url: SITE },
+      },
+      msgWa: "e li o artigo do blog.",
+    }),
+  });
+}
+paginas.push({
+  slug: "blog",
+  prioridade: "0.6",
+  html: pagina({
+    slug: "blog",
+    titulo: "Blog | Desentupidora Sampaio's",
+    descricao: "Artigos para síndicos, administradoras e empresas: manutenção de esgoto em condomínio, caixa de gordura de restaurante, poço de recalque e mais.",
+    h1: "Blog da <span>Sampaio's</span>",
+    subtitulo: "Manutenção de esgoto para condomínios, comércios e empresas",
+    migalhas: [["Início", "/"], ["Blog"]],
+    corpo: `
+  <section class="section">
+    <div class="container local-texto">
+      <div class="local-servicos">
+${[...posts]
+  .reverse()
+  .map((p) => `        <a href="/${p.slug}"><strong>${esc(p.titulo)}</strong><span>${esc(p.resumo)}</span></a>`)
+  .join("\n")}
+      </div>
+    </div>
+  </section>`,
+    jsonLd: servicoJsonLd("Desentupidora", "blog"),
+    msgWa: "e preciso de atendimento.",
   }),
 });
 

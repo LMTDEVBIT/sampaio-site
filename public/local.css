@@ -106,3 +106,15 @@
   .local-diag-item { grid-template-columns: 1fr; gap: 10px; }
   .local-servicos { grid-template-columns: 1fr; }
 }
+
+/* Blog */
+.blog-texto p a, .blog-texto li a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+.blog-texto .local-lista { line-height: 1.7; list-style: disc; }
+.blog-texto .local-lista li { margin-bottom: 8px; }

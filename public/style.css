@@ -967,8 +967,23 @@ ul { list-style: none; }
 }
 
 @media (max-width: 480px) {
+  /* Cabeçalho cabendo em celular de 360-430px (logo + WhatsApp + menu) */
+  .header-inner { gap: 12px; justify-content: space-between; }
+  .logo-img { height: 52px; }
+  .header-ctas { gap: 8px; }
+  .hdr-wpp { padding: 9px 12px; font-size: 13px; }
   .problemas-grid { grid-template-columns: 1fr; }
-  .metricas-grid { grid-template-columns: 1fr 1fr; }
+  .metricas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metrica-item { padding: 18px 12px; gap: 8px; min-width: 0; }
+  .metrica-icon { font-size: 22px; }
+  .metrica-item strong { font-size: 15px; }
+  .metrica-item span { font-size: 11px; }
   .hero-pills span { font-size: 12px; }
   .final-btns { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 380px) {
+  /* Telas bem estreitas: botão do WhatsApp só com o ícone */
+  .hdr-wpp { font-size: 0; gap: 0; padding: 10px; }
+  .hdr-wpp svg { width: 20px; height: 20px; }
 }

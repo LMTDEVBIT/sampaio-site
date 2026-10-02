@@ -27,36 +27,20 @@ window.addEventListener('scroll', () => {
   document.getElementById('header')?.classList.toggle('scrolled', window.scrollY > 10);
 });
 
-// GTM dataLayer — clique em telefone e WhatsApp
+// GTM dataLayer — clique em telefone e WhatsApp.
+// As conversões do Google Ads (conta oficial 841-259-8398 = AW-18485376135) disparam pelo GTM-KL5BSTLR nesses eventos
+// desde 02/10/2026. Não enviar a conversão também por aqui, senão cada clique conta duas vezes.
 window.dataLayer = window.dataLayer || [];
-
-// Conversões do Google Ads direto no site, na conta oficial da Sampaio's (841-259-8398 = AW-18485376135).
-// Ficam aqui e não no GTM porque o contêiner GTM-KL5BSTLR aponta para a conta antiga 210-705-9903 (AW-18485384738).
-// Se um dia as tags da conta oficial forem para o GTM, remover este bloco para não contar cada clique duas vezes.
-const ADS_ID = 'AW-18485376135';
-const ADS_CONVERSAO = { whatsapp: `${ADS_ID}/7fnkCLaSiI0dEIfpwe5E`, telefone: `${ADS_ID}/0yywCLmSiI0dEIfpwe5E` };
-function gtag() { window.dataLayer.push(arguments); }
-gtag('js', new Date());
-gtag('config', ADS_ID);
-(() => {
-  const s = document.createElement('script');
-  s.async = true;
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`;
-  document.head.appendChild(s);
-})();
-const conversao = (tipo) => gtag('event', 'conversion', { send_to: ADS_CONVERSAO[tipo], transport_type: 'beacon' });
 
 document.querySelectorAll('a[href^="tel:"]').forEach(a => {
   a.addEventListener('click', () => {
     window.dataLayer.push({ event: 'click_telefone' });
-    conversao('telefone');
   });
 });
 
 document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
   a.addEventListener('click', () => {
     window.dataLayer.push({ event: 'click_whatsapp' });
-    conversao('whatsapp');
   });
 });
 

@@ -173,7 +173,7 @@ ul { list-style: none; }
   inset: 0;
   background-image:
     linear-gradient(to right, rgba(7,16,24,.93) 0%, rgba(13,27,42,.88) 45%, rgba(13,27,42,.60) 100%),
-    url('servicos-bg.jpg');
+    url('servicos-bg.webp');
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;

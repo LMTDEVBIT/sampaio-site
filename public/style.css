@@ -385,7 +385,7 @@ ul { list-style: none; }
   inset: 0;
   background:
     linear-gradient(to bottom, rgba(249,250,251,.93) 0%, rgba(249,250,251,.72) 50%, rgba(249,250,251,.93) 100%),
-    url('hero-bg.jpg');
+    url('hero-bg.webp');
   background-size: cover;
   background-position: center 15%;
   background-repeat: no-repeat;
@@ -986,4 +986,10 @@ ul { list-style: none; }
   /* Telas bem estreitas: botão do WhatsApp só com o ícone */
   .hdr-wpp { font-size: 0; gap: 0; padding: 10px; }
   .hdr-wpp svg { width: 20px; height: 20px; }
+}
+
+/* Seções abaixo da dobra: o navegador só desenha quando chegam perto da tela (acelera a primeira pintura no celular) */
+#problemas, #servicos, #processo, #regioes, #faq, .section-final {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
